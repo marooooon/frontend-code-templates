@@ -1,0 +1,15 @@
+{
+  "name": "environment-gulp-for-web-production",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "commitAll": "git add . && git commit -m '[ update ]'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
