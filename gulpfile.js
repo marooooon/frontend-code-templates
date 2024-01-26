@@ -1,4 +1,5 @@
 // TODO: _testgulpfile.jsを参考にアローfunctionで書き換える
+// https://www.i-ryo.com/entry/2020/04/08/074158
 
 const gulp = require('gulp');
 const { src, dest } = require('gulp');
@@ -24,9 +25,13 @@ const notify = require('gulp-notify');
 const filter = require('gulp-filter');
 const htmlbeautify = require('gulp-html-beautify');
 
-function buildPug() {
+/* ----- ここからBUILD ----- */
+
+const buildPUG = (done) => {
   const pugFilter = filter(['**/*.pug', '!**/_*.pug'], { restore: true });
-  return src(['src/pug/*.pug', 'src/pug/**/*.pug'])
+  console.log('PUG BUILD開始');
+  gulp
+    .src(['src/pug/*.pug', 'src/pug/**/*.pug'])
     .pipe(
       plumber({
         errorHandler: notify.onError('Error: <%= error.message %>'),
@@ -50,82 +55,83 @@ function buildPug() {
         wrap_attributes: 'auto',
       })
     )
-	  .pipe(gulp.dest('./public/'))
-}
+    .pipe(gulp.dest('./public/'));
+  console.log('PUG BUILD終了');
+  done();
+};
 
-function buildCss() {
-  return src('src/scss/**/*.scss')
+const buildCSS = (done) => {
+  console.log('CSS BUILD開始');
+  gulp
+    .src('src/scss/**/*.scss')
     .pipe(sass({ outputStyle: 'expanded' }))
-    .pipe(gulp.dest('./public/stylesheets/'));
-}
+    .pipe(gulp.dest('./public/css/'));
+  console.log('CSS BUILD終了');
+  done();
+};
 
-function buildJavascript() {
-  return src(['src/javascript/**/*.js', 'src/javascript/*.js'])
+const buildJS = (done) => {
+  console.log('JS BUILD開始');
+  gulp
+    .src(['src/javascript/**/*.js', 'src/javascript/*.js'])
     .pipe(browserify())
     .pipe(uglify())
     .pipe(concat('script.js'))
     .pipe(dest('public/js/'));
-}
+  console.log('JS BUILD終了');
+  done();
+};
 
-function watchPug() {
-	return gulp
-		.watch(['src/pug/**/*.pug', 'src/pug/*.pug'])
-		.on('change', gulp.series(buildPug, browserReload));
-  }
-  
-  function watchCss() {
-	return gulp
-	  .watch(['src/scss/*.scss', 'src/scss/**/*.scss'])
-	  .on('change', browserSync.reload);
-  }
-  
-  function watchJavascript() {
-	return gulp
-	  .watch(['src/javascript/*.js', 'src/javascript/**/*.js'])
-	  .on('change', browserSync.reload);
-  }
+/* ----- ここまでBUILD ----- */
 
-// function watchPug() {
-//   return gulp
-//     .watch(['src/pug/**/*.pug', 'src/pug/*.pug'])
-//     .on('change', function () {
-//       return gulp.series(browserSync.reload);
-//     });
-// }
+/* ----- ここからWATCH ----- */
 
-// function watchCss() {
-//   return gulp
-//     .watch(['src/scss/*.scss', 'src/scss/**/*.scss'])
-//     .on('change', function () {
-//       return series(browserSync.reload);
-//     });
-// }
+const watchPUG = (done) => {
+  gulp.watch(
+    ['src/pug/**/*.pug', 'src/pug/*.pug'],
+    series(buildPUG, browserReload)
+  );
+  done();
+};
 
-// function watchJavascript() {
-//   return gulp
-//     .watch(['src/javascript/*.js', 'src/javascript/**/*.js'])
-//     .on('change', browserSync.reload);
-// }
+const watchCSS = (done) => {
+  gulp.watch(
+    ['src/scss/*.scss', 'src/scss/**/*.scss'],
+    series(buildCSS, browserReload)
+  );
+  done();
+};
+
+const watchJS = (done) => {
+  gulp.watch(
+    ['src/javascript/*.js', 'src/javascript/**/*.js'],
+    series(buildJS, browserReload)
+  );
+  done();
+};
+
+/* ----- ここまでWATCH ----- */
+
+const browserReload = (done) => {
+  browserSync.reload();
+  done();
+};
 
 function browserSyncFunction() {
-	return browserSync.init({
-	  server: {
-		baseDir: './public/',
-	  },
-	  port: '8000',
-	  ui: false,
-	}, function(err, bs) {
-	  console.log(bs.options.get('urls').get('local'));
-	});
+  return browserSync.init(
+    {
+      server: {
+        baseDir: './public/',
+      },
+      port: '8000',
+      ui: false,
+    },
+    function (err, bs) {
+      console.log(bs.options.get('urls').get('local'));
+    }
+  );
 }
-  
-const browserReload = (done) => {
-	browserSync.reload()
-	done()
-  }
 
-exports.build = parallel(buildPug, buildCss, buildJavascript);
-
-exports.watch = parallel(watchPug, watchCss, watchJavascript);
-
-exports.default = parallel(exports.build, exports.watch, browserSyncFunction);
+exports.build = parallel(buildPUG, buildCSS, buildJS);
+exports.watch = parallel(watchPUG, watchCSS, watchJS);
+exports.default = parallel(this.build, this.watch, browserSyncFunction);
