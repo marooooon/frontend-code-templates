@@ -1,1 +1,1 @@
-console.log("jsです");
+console.log('jsです');

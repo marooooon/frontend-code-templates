@@ -87,26 +87,17 @@ const buildJS = (done) => {
 /* ----- ここからWATCH ----- */
 
 const watchPUG = (done) => {
-  gulp.watch(
-    ['src/pug/**/*.pug', 'src/pug/*.pug'],
-    series(buildPUG, browserReload)
-  );
+  gulp.watch(['src/pug/**/*.pug', 'src/pug/*.pug'], series(buildPUG, browserReload));
   done();
 };
 
 const watchCSS = (done) => {
-  gulp.watch(
-    ['src/scss/*.scss', 'src/scss/**/*.scss'],
-    series(buildCSS, browserReload)
-  );
+  gulp.watch(['src/scss/*.scss', 'src/scss/**/*.scss'], series(buildCSS, browserReload));
   done();
 };
 
 const watchJS = (done) => {
-  gulp.watch(
-    ['src/javascript/*.js', 'src/javascript/**/*.js'],
-    series(buildJS, browserReload)
-  );
+  gulp.watch(['src/javascript/*.js', 'src/javascript/**/*.js'], series(buildJS, browserReload));
   done();
 };
 
