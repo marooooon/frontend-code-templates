@@ -29,7 +29,6 @@ const htmlbeautify = require('gulp-html-beautify');
 
 const buildPUG = (done) => {
   const pugFilter = filter(['**/*.pug', '!**/_*.pug'], { restore: true });
-  console.log('PUG BUILD開始');
   gulp
     .src(['src/pug/*.pug', 'src/pug/**/*.pug'])
     .pipe(
@@ -56,29 +55,24 @@ const buildPUG = (done) => {
       })
     )
     .pipe(gulp.dest('./public/'));
-  console.log('PUG BUILD終了');
   done();
 };
 
 const buildCSS = (done) => {
-  console.log('CSS BUILD開始');
   gulp
     .src('src/scss/**/*.scss')
     .pipe(sass({ outputStyle: 'expanded' }))
     .pipe(gulp.dest('./public/css/'));
-  console.log('CSS BUILD終了');
   done();
 };
 
 const buildJS = (done) => {
-  console.log('JS BUILD開始');
   gulp
     .src(['src/javascript/**/*.js', 'src/javascript/*.js'])
     .pipe(browserify())
     .pipe(uglify())
     .pipe(concat('script.js'))
     .pipe(dest('public/js/'));
-  console.log('JS BUILD終了');
   done();
 };
 

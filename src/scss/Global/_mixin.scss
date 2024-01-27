@@ -1,12 +1,14 @@
-@mixin media($breakpoint) {
-  @media #{map-get($breakpoints, $breakpoint)} {
+@use './_breakpoint.scss' as breakpoint;
+
+@mixin media($breakpoint: md) {
+  @media #{map-get(breakpoint.$breakpoints, $breakpoint)} {
     @content;
   }
 }
 
 /*
     使用方法
-    @include mq(md) {
+    @include media(md) {
         ...
     }
 */

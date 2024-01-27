@@ -1,3 +1,5 @@
+@use '../Global/mixin' as mixin;
+
 .u-mt5 {
   margin-top: 5px !important;
 }
@@ -12,4 +14,22 @@
 
 .u-mt20 {
   margin-top: 20px !important;
+}
+
+@include mixin.media() {
+  .u-mt5__sp {
+    margin-top: 5px !important;
+  }
+
+  .u-mt10__sp {
+    margin-top: 10px !important;
+  }
+
+  .u-mt15__sp {
+    margin-top: 15px !important;
+  }
+
+  .u-mt20__sp {
+    margin-top: 20px !important;
+  }
 }
