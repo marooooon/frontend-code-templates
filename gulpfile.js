@@ -28,7 +28,7 @@ const htmlbeautify = require('gulp-html-beautify');
 /* ----- ここからBUILD ----- */
 
 const buildPUG = (done) => {
-  const pugFilter = filter(['**/*.pug', '!**/_*.pug'], { restore: true });
+  const pugFilter = filter(['**/*.pug', '!**/_*.pug', '!_pages/*.pug'], { restore: true });
   gulp
     .src(['src/pug/*.pug', 'src/pug/**/*.pug'])
     .pipe(

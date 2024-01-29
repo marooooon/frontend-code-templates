@@ -1,0 +1,30 @@
+doctype html
+html(lang="ja")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+		// titleを書いてください。
+		block head
+
+		link(rel="stylesheet" href=`/css/common.css`)
+
+		// 読み込むcssがあれば記載してください。
+		block css
+
+	body
+		header.header
+			p home用ヘッダーです。
+
+		// ぱんくずリスト
+		//- include ../components/_breadcrumbs
+
+		block content
+
+		footer.footer
+			p home用フッターです。
+
+		script(src="js/script.js")
+
+		// 他に読み込むjsがあれば記載してください。
+		block js
