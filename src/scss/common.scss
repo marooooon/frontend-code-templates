@@ -5,13 +5,15 @@
 @use './Global/_mixin.scss';
 
 @use './Foundation/_normalize.scss';
-// @use './Foundation/_reset.scss';
+@use './Foundation/_reset.scss';
 @use './Foundation/_base.scss';
 
 @use './Layout/_header.scss';
 @use './Layout/_footer.scss';
 @use './Layout/_main.scss';
 @use './Layout/_sidebar.scss';
+
+@use './Pages/index.scss';
 
 @use './Component/_button.scss';
 

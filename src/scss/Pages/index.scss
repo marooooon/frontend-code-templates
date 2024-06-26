@@ -1,0 +1,7 @@
+@use '../Global/_variable.scss' as *;
+@use '../Global/_mixin.scss' as *;
+
+.p-index {
+  @include containerInner;
+  margin-top: 30px;
+}

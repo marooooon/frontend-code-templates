@@ -1,12 +1,32 @@
 @use './Global/_variable.scss' as *;
+@use './Global/_mixin.scss' as *;
 
 .l-header {
+  border-bottom: 1px solid #eee;
   &__inner {
+    @include containerInner;
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 200px;
-    background-color: $blue;
-    color: #fff;
+  }
+  &__logo {
+    @include hoverText;
+    width: 30%;
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 50px;
+    width: 70%;
+    li {
+      padding: 0 1rem;
+      &:last-child {
+        padding-right: 0;
+      }
+      a {
+        @include hoverText;
+        padding-bottom: 4px;
+      }
+    }
   }
 }

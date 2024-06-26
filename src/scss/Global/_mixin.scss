@@ -6,6 +6,21 @@
   }
 }
 
+@mixin containerInner() {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+@mixin hoverText() {
+  transition: color 0.2s;
+  padding: 0 2px 4px;
+  &:hover {
+    color: #2296f3;
+    border-bottom: 4px solid #2296f3;
+  }
+}
+
 /*
     使用方法
     @include media(md) {

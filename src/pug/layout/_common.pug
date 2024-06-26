@@ -7,6 +7,10 @@ html(lang="ja")
 		// titleを書いてください。
 		block head
 
+		link(rel="preconnect" href="https://fonts.googleapis.com")
+		link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+		link(href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet")
+
 		link(rel="stylesheet" href=`/css/common.css`)
 
 		// 読み込むcssがあれば記載してください。
@@ -14,22 +18,22 @@ html(lang="ja")
 
 	body
 		header.l-header
-			.l-header-nav
-				ul.l-header__nav_list
-					li.l-header__nav_list
-						a(href="/pages/css/") CSS一覧
-					li.l-header__nav_list
-						a(href="/pages/javascript/") JS一覧
 			.l-header__inner
-				p home用ヘッダーです。
+				h1
+					a.l-header__logo(href="/") FRONTEND CODE
+				ul.l-header__nav
+					li
+						a(href="/pages/css/") CSS
+					li
+						a(href="/pages/javascript/") JavaScript
 
 		// ぱんくずリスト
 		//- include ../components/_breadcrumbs
 
 		block content
 
-		footer.footer
-			p home用フッターです。
+		footer.l-footer
+			p © 2024 Daijiro Takeuchi All rights reserved
 
 		script(src="js/script.js")
 
